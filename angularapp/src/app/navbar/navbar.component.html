@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" *ngIf="checkuser.role==='User'">
+    <a class="navbar-brand" href="userhome.html">Bark N Burr<img src="https://cdn-icons-png.flaticon.com/512/1581/1581645.png" height="30px" width="30px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/cart']"><div *ngIf="totalItem != 0" style="font-size: 10px;" class="badge bg-info">{{totalItem}}</div> Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/myorders']">My Orders</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      &nbsp;&nbsp;<button type="button" class="btn btn-primary" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="checkuser.role==='Admin'">
+      <a class="navbar-brand" href="userhome.html">Bark N Burr<img src="https://cdn-icons-png.flaticon.com/512/1581/1581645.png" height="30px" width="30px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/admin']">Admin Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/adminuser']">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/orders']">Orders</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        &nbsp; <button type="button" class="btn btn-primary" (click)="logout()">Logout</button>
+      </div>
+    </nav>
+  
+  
