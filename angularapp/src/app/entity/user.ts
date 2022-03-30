@@ -7,5 +7,5 @@ export class User {
     active:  boolean ;
 	role: String;
     constructor(){
-}
-}
+
+    }
