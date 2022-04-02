@@ -7,18 +7,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
+<<<<<<< HEAD
+import com.example.demo.model.UserModel;
+import com.example.demo.repository.UserRepo;
+import com.example.demo.responseEntity.ResponseHandler;
+import com.example.demo.util.JwtAuthentication;
+=======
 import com.examly.springapp.model.UserModel;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.responseEntity.ResponseHandler;
 //import com.examly.springapp.JwtAuthentication;
+>>>>>>> 43eca3de2a516ecb1bc8aa7d1c9b5f73d1efc33f
 
 @Service
 public class UserService {
 	String role="User";
 	@Autowired
 	private UserRepo userRepo;
+<<<<<<< HEAD
+	@Autowired
+	private JwtAuthentication jwt;
+=======
 	//@Autowired
 	//private JwtAuthentication jwt;
+>>>>>>> 43eca3de2a516ecb1bc8aa7d1c9b5f73d1efc33f
 	public UserService(UserRepo userRepo) {
 		super();
 		this.userRepo = userRepo;
@@ -45,8 +57,13 @@ public class UserService {
 		}
 		userlocal.setActive(true);
 		userRepo.save(userlocal);
+<<<<<<< HEAD
+		String token = jwt.generateJwt(userlocal);
+		return ResponseHandler.generateLoginResponse("Login Success",token, HttpStatus.OK, userlocal);
+=======
 		//String token = jwt.generateJwt(userlocal);
 		return ResponseHandler.generateResponse("Login Success", HttpStatus.OK, userlocal);
+>>>>>>> 43eca3de2a516ecb1bc8aa7d1c9b5f73d1efc33f
 	}
 	
 	public UserModel findByEmail(String email) {
