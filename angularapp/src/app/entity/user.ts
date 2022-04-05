@@ -6,6 +6,12 @@ export class User {
 	phoneNumber: String;
     active:  boolean ;
 	role: String;
+<<<<<<< HEAD
     constructor(){
 
     }
+=======
+    constructor(){}
+
+    }
+>>>>>>> BarkNBurr

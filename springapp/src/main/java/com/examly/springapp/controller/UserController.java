@@ -16,7 +16,11 @@ import com.examly.springapp.model.UserModel;
 import com.examly.springapp.service.UserService;
 
 @RestController
+<<<<<<< HEAD
 @CrossOrigin(origins="http://localhost:8081")
+=======
+@CrossOrigin(origins="https://8081-ebfacbcadfdfcfaadbbadeedfbffdec.examlyiopb.examly.io")
+>>>>>>> BarkNBurr
 public class UserController {
 	@Autowired
 	private UserService userService;
