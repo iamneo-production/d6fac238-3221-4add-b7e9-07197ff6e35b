@@ -6,53 +6,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.example.demo.model.UserModel;
-import com.example.demo.repository.UserRepo;
-import com.example.demo.responseEntity.ResponseHandler;
-import com.example.demo.util.JwtAuthentication;
-=======
-=======
->>>>>>> BarkNBurr
->>>>>>> 131bdfba65346034eed2d65f32748cd10e8ebd6a
 import com.examly.springapp.model.UserModel;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.responseEntity.ResponseHandler;
-//import com.examly.springapp.JwtAuthentication;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 43eca3de2a516ecb1bc8aa7d1c9b5f73d1efc33f
-=======
->>>>>>> BarkNBurr
->>>>>>> 131bdfba65346034eed2d65f32748cd10e8ebd6a
 
 @Service
 public class UserService {
 	String role="User";
 	@Autowired
 	private UserRepo userRepo;
-<<<<<<< HEAD
+
 	//@Autowired
 	//private JwtAuthentication jwt;
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-	@Autowired
-	private JwtAuthentication jwt;
-=======
-	//@Autowired
-	//private JwtAuthentication jwt;
->>>>>>> 43eca3de2a516ecb1bc8aa7d1c9b5f73d1efc33f
-=======
-	//@Autowired
-	//private JwtAuthentication jwt;
->>>>>>> BarkNBurr
->>>>>>> 131bdfba65346034eed2d65f32748cd10e8ebd6a
+
 	public UserService(UserRepo userRepo) {
 		super();
 		this.userRepo = userRepo;
@@ -79,23 +45,9 @@ public class UserService {
 		}
 		userlocal.setActive(true);
 		userRepo.save(userlocal);
-<<<<<<< HEAD
 		//String token = jwt.generateJwt(userlocal);
 		return ResponseHandler.generateResponse("Login Success", HttpStatus.OK, userlocal);
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-		String token = jwt.generateJwt(userlocal);
-		return ResponseHandler.generateLoginResponse("Login Success",token, HttpStatus.OK, userlocal);
-=======
-		//String token = jwt.generateJwt(userlocal);
-		return ResponseHandler.generateResponse("Login Success", HttpStatus.OK, userlocal);
->>>>>>> 43eca3de2a516ecb1bc8aa7d1c9b5f73d1efc33f
-=======
-		//String token = jwt.generateJwt(userlocal);
-		return ResponseHandler.generateResponse("Login Success", HttpStatus.OK, userlocal);
->>>>>>> BarkNBurr
->>>>>>> 131bdfba65346034eed2d65f32748cd10e8ebd6a
+
 	}
 	
 	public UserModel findByEmail(String email) {
