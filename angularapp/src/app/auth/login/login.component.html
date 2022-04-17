@@ -5,7 +5,7 @@
         
       </div> 
       <div class="col"> 
-       <div class="container" > 
+       <div class="container" id="loginBox" > 
          <h2>Login</h2> 
          <form #loginForm="ngForm" (ngSubmit)="login()"> 
            
@@ -35,7 +35,7 @@
          <tr></tr> 
          <br>
          <div style="margin-top: 10px;">
-         <small  style="font-size: large;">New Here?<a  style=" color: blue; 
+         <small  style="font-size: large;">New Here?<a id="signupLink" style=" color: blue; 
            text-decoration: none; font-size: large;font-family: Simonetta;" [routerLink]="['/signup']">SignUp</a> </small> </div>
        </div> 
       </div> 
