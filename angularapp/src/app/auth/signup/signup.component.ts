@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
-import { User } from '../entity/user';
-import { UserService } from '../services/user.service';
+import { User } from '../../entity/user';
+
 declare let alertify:any;
 
 

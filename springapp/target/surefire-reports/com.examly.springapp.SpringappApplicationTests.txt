@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.examly.springapp.SpringappApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 6.712 s <<< FAILURE! - in com.examly.springapp.SpringappApplicationTests
+BE_Update_Product  Time elapsed: 0.252 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at com.examly.springapp.SpringappApplicationTests.BE_Update_Product(SpringappApplicationTests.java:72)
+
+BE_Get_Product  Time elapsed: 0.029 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at com.examly.springapp.SpringappApplicationTests.BE_Get_Product(SpringappApplicationTests.java:58)
+
+BE_Add_Product  Time elapsed: 0.021 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at com.examly.springapp.SpringappApplicationTests.BE_Add_Product(SpringappApplicationTests.java:48)
+
