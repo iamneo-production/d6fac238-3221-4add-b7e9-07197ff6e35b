@@ -1,3 +1,7 @@
+/home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/repository/ProductRepo.java
+/home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/model/Product.java
+/home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/service/ProductService.java
+/home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/controller/ProductController.java
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/responseEntity/ResponseHandler.java
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/model/UserModel.java
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/SpringappApplication.java
