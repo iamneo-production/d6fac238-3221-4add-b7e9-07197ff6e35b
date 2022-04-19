@@ -1,1 +1,77 @@
-<p>cart works!</p>
+<app-navbar></app-navbar>
+<div class="container-fluid" style="padding-bottom: 100px;">
+<ng-container *ngIf="products.length !=0">
+<div class="card" style="margin-top: 100px;">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4><b>Shopping Cart</b></h4>
+                    </div>
+                    <div class="col align-self-center text-right text-muted">{{productlength}} items</div>
+                </div>
+            </div>
+            <div class="row border-top border-bottom">
+                <div class="row main align-items-center" *ngFor="let item of products">
+                    <div class="col-2"><img class="img-fluid" [src]="item.product.imageUrl" alt=""></div>
+                    <div class="col">
+                        
+                        <div class="row">{{item.product.product_name}}</div>
+                    </div>
+                    <div class="col"> <a  (click)="minus(item)">-</a><a  class="border">{{item.quantity}}</a><a  (click)="add(item)">+</a> </div>
+                    <div class="col">$ {{item.product.price}}  <span class="close" (click)="removeItem(item.cartItemid)">&#10005;</span></div>
+                    
+                </div>
+            </div>
+           
+           
+            <div class="back-to-shop"><a [routerLink]="['/home']"> --<span class="text-muted">Back to shop</span></a></div>
+        </div>
+        <div class="col-md-4 summary">
+            <div>
+                <h5><b>Summary</b></h5>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">ITEMS </div>
+                <div class="col text-right" >PRICE</div>
+            </div>
+            <br>
+            <div *ngFor="let item of products">
+            <div class="row">
+                <div class="col" style="padding-left:0;">{{item.product.product_name}}</div>
+                <div class="col text-right">$ {{item.quantity*item.product.price}}</div>
+            </div><br>
+        </div>
+            
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right">$ {{grandTotal}}</div>
+            </div> <button class="btn"(click)="toCheckout()">CHECKOUT</button>
+        </div>
+    </div>
+</div>
+</ng-container>
+<ng-container *ngIf="products.length ==0">
+  <div class="container " style="margin-top: 100px;">
+      <div class="card empty ">
+          <div class="row align-self-center">
+              
+          <h1 class="title" style="margin-top: 10px;">My Cart</h1>
+        </div>
+        <div class="row align-self-center emptycart">
+      <div class="center">
+          <img src="https://media.istockphoto.com/photos/happy-smiling-pug-puppy-dog-holding-up-wire-metal-shopping-basket-picture-id1126251896?k=20&m=1126251896&s=612x612&w=0&h=FWvYTuVbDKbUWgdw0Ly9JKnUjX0UB8j_tpUYg4bmqns="  alt="">
+          <h4 style="margin-left: 150px;">Your cart is empty!</h4>
+          <h5>Add dogs - To make your life beautiful as never before</h5>
+         
+          <button routerLink="/home" class="btn btn-primary">Shop Now</button>
+        
+      </div>
+    </div>
+    </div>
+  </div>
+</ng-container>
+</div>
+<app-footer></app-footer>

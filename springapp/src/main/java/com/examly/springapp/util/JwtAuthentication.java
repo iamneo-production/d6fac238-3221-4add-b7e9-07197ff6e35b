@@ -3,7 +3,7 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
-import com.example.demo.model.UserModel;
+import com.examly.springapp.model.UserModel;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
