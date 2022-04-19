@@ -6,7 +6,8 @@ export class User {
 	phoneNumber: String;
     active:  boolean ;
 	role: String;
-    constructor(){
+
+
+    constructor(){}
 
     }
-}
