@@ -9,7 +9,9 @@ import { CartService } from '../services/cart.service';
 })
 export class NavbarComponent implements OnInit {
   checkuser:any;
-  public totalItem : number = 0;
+  temp:any;
+  username:String;
+  public totalItem : number ;
   
   constructor(private router:Router,private cartService:CartService) { }
 

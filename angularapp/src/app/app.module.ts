@@ -12,6 +12,7 @@ import { AdminhomepageComponent } from './adminhomepage/adminhomepage.component'
 import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { OrderComponent } from './order/order.component';
     LoginComponent,
     SignupComponent,
     HomepageComponent,
+    NavbarComponent,
     AdminhomepageComponent,
     FooterComponent,
     CartComponent,
