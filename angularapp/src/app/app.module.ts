@@ -10,6 +10,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AdminhomepageComponent } from './adminhomepage/adminhomepage.component';
 import { FooterComponent } from './footer/footer.component';
+import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { FooterComponent } from './footer/footer.component';
     SignupComponent,
     HomepageComponent,
     AdminhomepageComponent,
-    FooterComponent
+    FooterComponent,
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
