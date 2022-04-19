@@ -1,0 +1,219 @@
+<app-navbar></app-navbar>
+  <div class="container-fluid users" style="margin-bottom: 180px;">
+    <div class="title d-flex justify-content-center">
+      <div class="row">
+          <div class="col">
+              <h4><b> User Management</b></h4>
+          </div>
+          
+      </div>
+  </div>
+    <div class="row pb-2 pt-3 pl-2 ">
+    <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">Add User</button>
+    </div>
+            <table class="table table-hover" >
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">PhoneNumber</th>
+                    <th scope="col">Active</th>
+                    <th scope="col"></th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let temp of users | slice: (page-1) * pageSize : page * pageSize">
+                    <th scope="row">{{temp.id}}</th>
+                    <td>{{temp.username}}</td>
+                    <td>{{temp.email}}</td>
+                    <td>{{temp.role}} </td>
+                    <td>{{temp.phoneNumber}} </td>
+                    <td>{{temp.active}}</td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edituser" (click)="edituser(temp.id)">Edit</button> &nbsp;<button class="btn btn-danger" data-toggle="modal" data-target="#deleteuser" (click)="getUserId(temp.id)">Delete</button></td>
+                  </tr>
+                </tbody>
+               
+              </table>
+              <ngb-pagination class="border-top pt-3 d-flex justify-content-center"
+              [(page)]="page"
+              [pageSize]="pageSize"
+              [collectionSize]="users.length"></ngb-pagination>
+                      
+        </div>
+        <!---Add User-->
+        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #addUser="ngForm" (ngSubmit)="newUser()">
+                    <div class="form-group">
+                        <label for="username" class="label">UserName:</label>
+                       <input type="text" class="form-control"placeholder="Enter Username" name="username" [(ngModel)]="user.username" required #username="ngModel" 
+                       [class.is-invalid]="username.invalid && username.touched">
+                       <div *ngIf="username.errors && (username.invalid && username.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        <div *ngIf="username.hasError('required')">Username is required</div>
+                      
+                      </div>
+                      </div>
+                      <div class="form-group">
+                       <label for="phno" class="label">Phone Number:</label>
+                      <input type="text" class="form-control"placeholder="Enter phonenumber" name="phoneNumber" [(ngModel)]="user.phoneNumber" required #phoneNumber="ngModel" pattern="^\d{10}$"
+                       [class.is-invalid]="phoneNumber.invalid && phoneNumber.touched">
+              
+                       <div *ngIf="phoneNumber.errors && (phoneNumber.invalid && phoneNumber.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        <div *ngIf="phoneNumber.hasError('required')">Phone Number is required</div>
+                        <div *ngIf="phoneNumber.hasError('pattern')">Enter Valid Phone Number</div>
+                      </div>
+                     </div>
+                     <div class="form-group">
+                       
+                       <label for="email" class="label">Email:</label>
+                       <input type="email" class="form-control"placeholder="Enter email" name="email" required [(ngModel)]="user.email" #email="ngModel" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" 
+                       [class.is-invalid]="email.invalid && email.touched">
+                      
+                       <div *ngIf="email.errors && (email.invalid && email.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        
+                         <div *ngIf="email.hasError('required')">Email is required</div>
+                         <div *ngIf="email.hasError('pattern')">Enter Valid Email </div>
+                        </div>
+                        
+                      
+                     </div>
+               
+                     <div class="form-group">
+                       <label for="pwd" class="label">Password:</label>
+                       <input type="password" class="form-control"  placeholder="Minimum 8 characters,at least one letter and one number" name="password"   required [(ngModel)]="user.password" #password="ngModel" pattern="^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$"
+                       [class.is-invalid]="password.invalid && password.touched">
+              
+                       <div *ngIf="password.errors && (password.invalid && password.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        <div *ngIf="password.hasError('required')">Password is required</div>
+                        <div *ngIf="password.hasError('pattern')">Enter Valid password</div>
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label for="role" class="label">Role:</label>
+                       <input type="text" class="form-control"  placeholder="Enter Role" name="role" required [(ngModel)]="user.role" #role="ngModel"
+                       [class.is-invalid]="role.invalid && role.touched">
+                       <div *ngIf="role.errors && (role.invalid && role.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        <div *ngIf="role.hasError('required')">Role is required</div>
+                     </div>
+                     </div>
+                    
+                     <div class="con" >
+                     <button type="submit" class="btn btn-primary" style="margin-left: 275px; margin-right: 50px; width: 200px; border-radius: 20px;">Submit</button>
+                    </div>
+                  </form>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!---Edit User-->
+          <div class="modal fade bd-example-modal-lg" id="edituser" tabindex="-1" role="dialog" aria-labelledby="edituser" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #editUser="ngForm" (ngSubmit)="onSubmitUser()">
+                    <div class="form-group">
+                        <label for="username" class="label">UserName:</label>
+                       <input type="text" class="form-control"placeholder="Enter Username" name="username" [(ngModel)]="user1.username"  required #username="ngModel" 
+                       [class.is-invalid]="username.invalid && username.touched">
+                       <div *ngIf="username.errors && (username.invalid && username.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        <div *ngIf="username.hasError('required')">Username is required</div>
+                      
+                      </div>
+                      </div>
+                      <div class="form-group">
+                       <label for="phno" class="label">Phone Number:</label>
+                      <input type="text" class="form-control"placeholder="Enter phonenumber" name="phoneNumber" [(ngModel)]="user1.phoneNumber" required #phoneNumber="ngModel" pattern="^\d{10}$"
+                       [class.is-invalid]="phoneNumber.invalid && phoneNumber.touched">
+              
+                       <div *ngIf="phoneNumber.errors && (phoneNumber.invalid && phoneNumber.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        <div *ngIf="phoneNumber.hasError('required')">Phone Number is required</div>
+                        <div *ngIf="phoneNumber.hasError('pattern')">Enter Valid Phone Number</div>
+                      </div>
+                     </div>
+                     <div class="form-group">
+                       
+                       <label for="email" class="label">Email:</label>
+                       <input type="email" class="form-control"placeholder="Enter email" name="email" required [(ngModel)]="user1.email" #email="ngModel" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" 
+                       [class.is-invalid]="email.invalid && email.touched">
+                      
+                       <div *ngIf="email.errors && (email.invalid && email.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        
+                         <div *ngIf="email.hasError('required')">Email is required</div>
+                         <div *ngIf="email.hasError('pattern')">Enter Valid Email </div>
+                        </div>
+                        
+                      
+                     </div>
+               
+                     <div class="form-group">
+                       <label for="pwd" class="label">Password:</label>
+                       <input type="password" class="form-control"  placeholder="Minimum 8 characters,at least one letter and one number" name="password"   required [(ngModel)]="user1.password" #password="ngModel" pattern="^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$"
+                       [class.is-invalid]="password.invalid && password.touched">
+              
+                       <div *ngIf="password.errors && (password.invalid && password.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        <div *ngIf="password.hasError('required')">Password is required</div>
+                        <div *ngIf="password.hasError('pattern')">Enter Valid password</div>
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label for="role" class="label">Role:</label>
+                       <input type="text" class="form-control"  placeholder="Enter Role" name="role" required [(ngModel)]="user1.role" #role="ngModel"
+                       [class.is-invalid]="role.invalid && role.touched">
+                       <div *ngIf="role.errors && (role.invalid && role.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                        <div *ngIf="role.hasError('required')">Role is required</div>
+                     </div>
+                     </div>
+                     
+                     <button type="submit" class="btn btn-primary"style="margin-left: 275px; margin-right: 50px; width: 200px; border-radius: 20px;">Submit</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+             
+              </div>
+            </div>
+          </div>
+           <!---Delete User-->
+          <div class="modal fade" id="deleteuser" tabindex="-1" role="dialog" aria-labelledby="deleteuserLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure to Delete User 
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" (click)="deleteUser()">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-footer></app-footer>

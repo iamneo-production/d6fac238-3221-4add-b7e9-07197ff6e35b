@@ -1,0 +1,20 @@
+.adduserbtn{
+    float: left;
+    width: 200px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+.users{
+    max-width: 1200px;
+    border-top:grey ;
+    margin-top: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.form-group{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.form-control{
+    border-radius: 10px;
+}
