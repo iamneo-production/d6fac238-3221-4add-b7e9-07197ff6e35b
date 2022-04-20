@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
       this.totalItem = res.length;
     })
     this.checkuser=JSON.parse(localStorage.getItem("userdata"));
+    this.username=this.checkuser.username;
   }
   logout(){
     localStorage.removeItem("token");

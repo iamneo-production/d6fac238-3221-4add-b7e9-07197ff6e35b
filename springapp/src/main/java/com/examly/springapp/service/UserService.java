@@ -9,16 +9,14 @@ import org.springframework.stereotype.Service;
 import com.examly.springapp.model.UserModel;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.responseEntity.ResponseHandler;
-
+import com.examly.springapp.util.JwtAuthentication;
 @Service
 public class UserService {
 	String role="User";
 	@Autowired
 	private UserRepo userRepo;
-
-	//@Autowired
-	//private JwtAuthentication jwt;
-
+	@Autowired
+	private JwtAuthentication jwt;
 	public UserService(UserRepo userRepo) {
 		super();
 		this.userRepo = userRepo;
@@ -45,9 +43,8 @@ public class UserService {
 		}
 		userlocal.setActive(true);
 		userRepo.save(userlocal);
-		//String token = jwt.generateJwt(userlocal);
-		return ResponseHandler.generateResponse("Login Success", HttpStatus.OK, userlocal);
-
+		String token = jwt.generateJwt(userlocal);
+		return ResponseHandler.generateLoginResponse("Login Success",token, HttpStatus.OK, userlocal);
 	}
 	
 	public UserModel findByEmail(String email) {
