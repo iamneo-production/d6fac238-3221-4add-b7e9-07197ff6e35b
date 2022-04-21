@@ -9,6 +9,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { OrderComponent } from './order/order.component';
+import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [
   {path:'' ,component:LoginComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path:'admin' ,component:AdminhomepageComponent,canActivate:[AuthGuard,RoleGuard]},
   {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
   {path:'myorders',component:OrderComponent,canActivate:[AuthGuard]},
-  {path:'checkout',component:CheckoutComponent,canActivate:[AuthGuard]}
+  {path:'checkout',component:CheckoutComponent,canActivate:[AuthGuard]},
+  {path:'vieworder/:id',component:ViewComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

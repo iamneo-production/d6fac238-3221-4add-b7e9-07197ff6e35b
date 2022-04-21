@@ -1,0 +1,101 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row pt-3 pb-2 pl-3">
+  <a [routerLink]="['/home']" ><span class="text-muted">Back to shop</span></a></div>
+    <div class="card" style="border: none;">
+  <div class="card-header">
+  Invoice
+  <strong>{{order.createdDate}}</strong> 
+    
+    
+  </div>
+  <div class="card-body ">
+  <div class="row mb-4">
+  <div class="col-sm-6">
+  <h6 class="mb-3">From:</h6>
+  <div>
+  <strong>Bark N Burr</strong>
+  </div>
+  <div>Bark N Burr</div>
+  <div>71-101 usa street, Usa</div>
+  <div>Email: bark@barknburr.com.</div>
+  <div>Phone: +12 345 678 9000</div>
+  </div>
+  
+  <div class="col-sm-6">
+  <h6 class="mb-3">To:</h6>
+  <div>
+  <strong>{{user.username}}</strong>
+  </div>
+  
+  <div>{{order.address.houseno}},{{order.address.street}}</div>
+  <div>{{order.address.city}},{{order.address.pincode}}</div>
+  <div>Email: {{user.email}}</div>
+  <div>Phone: {{user.phoneNumber}}</div>
+  </div>
+  
+  
+  
+  </div>
+  
+  <div class="table-responsive-sm" >
+  <table class="table table">
+  <thead>
+  <tr>
+  
+  <th>Item</th>
+  
+  
+  <th class="right">Unit Cost</th>
+  <th class="right">Qty</th>
+  <th class="right">Total</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of order.orderItems">
+  <td class="left strong">{{item.product.product_name}}</td>
+  <td class="right">$ {{item.product.price}}</td>
+    <td class="center">{{item.quantity}}</td>
+  <td class="right">$ {{item.product.price *item.quantity}}</td>
+  </tr>
+  <tr class="card-header">
+    <td></td>
+    <td></td>
+    <td><strong>Grand Total</strong></td>
+    <td>$ {{grandtotal}}</td>
+  </tr>
+  </tbody>
+  </table>
+  </div>
+  
+  
+  </div>
+ 
+  <div class="row align-self-center pt-3  pb-3">
+ 
+  <button class="btn btn-danger" data-toggle="modal" data-target="#deleteorder">Cancel Order</button>&nbsp;&nbsp;
+  <button class="btn btn-danger"(click)="generatePDF()"><i class="fa fa-download"></i> Download</button> 
+  </div>
+
+  </div>
+</div>
+<div class="modal fade" id="deleteorder" tabindex="-1" role="dialog" aria-labelledby="deleteuserLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cancel Order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure to Cancel Order
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="deleteOrder()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <app-footer></app-footer>

@@ -15,6 +15,7 @@ import { OrderComponent } from './order/order.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ViewComponent } from './view/view.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     FooterComponent,
     CartComponent,
     OrderComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ViewComponent
   ],
   imports: [
     BrowserModule,
