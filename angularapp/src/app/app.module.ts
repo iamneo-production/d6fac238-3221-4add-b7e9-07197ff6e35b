@@ -24,6 +24,7 @@ import { ViewComponent } from './view/view.component';
     LoginComponent,
     SignupComponent,
     HomepageComponent,
+<<<<<<< HEAD
     NavbarComponent,
     AdminhomepageComponent,
     FooterComponent,
@@ -31,13 +32,21 @@ import { ViewComponent } from './view/view.component';
     OrderComponent,
     CheckoutComponent,
     ViewComponent
+=======
+    AdminhomepageComponent,
+    FooterComponent,
+    ProductDetailsComponent
+>>>>>>> e1d86f65af87f2126f3ed0db6cc6f2f70e345eca
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+<<<<<<< HEAD
     NgbModule,
+=======
+>>>>>>> e1d86f65af87f2126f3ed0db6cc6f2f70e345eca
   ],
   providers: [],
   bootstrap: [AppComponent]

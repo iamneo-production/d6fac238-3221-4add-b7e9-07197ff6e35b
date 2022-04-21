@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { Router } from '@angular/router';
 import { Product } from '../entity/product';
 import { ProductService } from '../services/product.service';
 declare let alertify:any;
+=======
+
+>>>>>>> e1d86f65af87f2126f3ed0db6cc6f2f70e345eca
 @Component({
   selector: 'app-adminhomepage',
   templateUrl: './adminhomepage.component.html',
   styleUrls: ['./adminhomepage.component.css']
 })
 export class AdminhomepageComponent implements OnInit {
+<<<<<<< HEAD
   public page=1;
   public pageSize=3;
   pid:number;
@@ -102,6 +107,12 @@ export class AdminhomepageComponent implements OnInit {
         alertify.error("Product not Deleted");
       }
     )
+=======
+
+  constructor() { }
+
+  ngOnInit(): void {
+>>>>>>> e1d86f65af87f2126f3ed0db6cc6f2f70e345eca
   }
 
 }
