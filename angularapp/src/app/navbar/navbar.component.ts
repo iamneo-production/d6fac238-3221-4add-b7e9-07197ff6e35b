@@ -9,7 +9,9 @@ import { CartService } from '../services/cart.service';
 })
 export class NavbarComponent implements OnInit {
   checkuser:any;
-  public totalItem : number = 0;
+  temp:any;
+  username:String;
+  public totalItem : number ;
   
   constructor(private router:Router,private cartService:CartService) { }
 
@@ -19,6 +21,7 @@ export class NavbarComponent implements OnInit {
       this.totalItem = res.length;
     })
     this.checkuser=JSON.parse(localStorage.getItem("userdata"));
+    this.username=this.checkuser.username;
   }
   logout(){
     localStorage.removeItem("token");

@@ -1,0 +1,155 @@
+<app-navbar></app-navbar>
+<div class="container-fluid" style="padding-bottom: 100px;">
+<ng-container *ngIf="products.length !=0">
+<div class="card" style="margin-top: 100px;">
+    <div class="row">
+        <div class="col-md-6 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4><b>Checkout</b></h4>
+                    </div>
+                    <div class="col align-self-center text-right text-muted">{{products.length}} items</div>
+                </div>
+            </div>
+            <div class="row  border-bottom">
+              <div class="row main align-items-center" >
+                  <div class="col-2"></div>
+                  <div class="col">
+                   Product
+                  </div>
+                  <div class="col"> Quantity </div>
+                  <div class="col"> Price</div>
+                  <div class="col">Total </div>
+                  
+              </div>
+          </div>
+            <div class="row border-top border-bottom">
+                <div class="row main align-items-center" *ngFor="let item of products">
+                    <div class="col-2"><img class="img-fluid" [src]="item.product.imageUrl" alt=""></div>
+                    <div class="col">
+                      {{item.product.product_name}}
+                    </div>
+                    <div class="col"> {{item.quantity}} </div>
+                    <div class="col"> {{item.product.price}} </div>
+                    <div class="col">${{item.quantity*item.product.price}}  </div>
+                    
+                </div>
+            </div>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+              <div class="col">TOTAL PRICE</div>
+              <div class="col text-right" style="margin-right: 70px;">$ {{grandTotal}}</div>
+          </div> 
+           
+            <div class="back-to-shop"><a [routerLink]="['/home']"><span class="text-muted">Back to shop</span></a></div>
+        </div>
+        <div class="col-md-6 summary">
+          <div>
+            <h5><b> Grand Total</b></h5>
+            <div class="row" style="border-bottom: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+              <div class="col">TOTAL PRICE</div>
+              <div class="col text-right" style="margin-right: 70px;">$ {{grandTotal}}</div>
+          </div> 
+        </div>
+            <div>
+                <h5><b> Delivery Address</b></h5>
+            </div>
+            <hr>
+            <form #addressForm="ngForm" (ngSubmit)="onSubmit()"> 
+            <div class="row">
+    <div class="col">
+      <div class="form-group"> 
+      <label for="House_Number" class="label">House No./Flat No.</label> 
+      <input type="text" class="form-control"placeholder="Enter House_no/Flat_No" name="houseno" required [(ngModel)]="address.houseno" #houseno="ngModel"
+      [class.is-invalid]="houseno.invalid && houseno.touched">
+      <div *ngIf="houseno.errors && (houseno.invalid && houseno.touched)"  style="margin-top: 5px;">
+        <div *ngIf="houseno.hasError('required')" class="text-danger">House_no/Flat_no is required</div>  
+    </div>
+    </div>
+    </div>
+    
+    <div class="col">
+      <div class="form-group "> 
+      <label for="street_name" class="label">Street</label> 
+      <input type="text" class="form-control" placeholder="Enter Street" name="street_name"  required  [(ngModel)]="address.street" #street_name="ngModel"
+      [class.is-invalid]="street_name.invalid && street_name.touched">
+                 <div *ngIf="street_name.errors && (street_name.invalid && street_name.touched)"  >
+                  <div *ngIf="street_name.hasError('required')" class="text-danger">Street is required</div>  
+    </div>
+    </div>
+ </div>
+ </div>
+            <div class="row">
+              <div class="col">
+              <div class="form-group "> 
+                <label for="city" class="label">City</label> 
+                <input type="text" class="form-control" placeholder="Enter city" name="city"  required  [(ngModel)]="address.city" #city="ngModel"
+                [class.is-invalid]="city.invalid && city.touched">
+                           <div *ngIf="city.errors && (city.invalid && city.touched)" >
+                            <div *ngIf="city.hasError('required')" class="text-danger">City is required</div>
+                </div>
+              </div>
+            </div>
+              <div class="col">
+                <div class="form-group "> 
+                <label for="state" class="label">State</label> 
+                <input type="text" class="form-control" placeholder="Enter state" name="state"  required  [(ngModel)]="address.state" #state="ngModel"
+                [class.is-invalid]="state.invalid && state.touched">
+                         <div *ngIf="state.errors && (state.invalid && state.touched)" >
+                          <div *ngIf="state.hasError('required')"class="text-danger">State is required</div>
+                </div>
+              </div>
+             </div>
+            </div>
+            
+            <div class="row"> 
+      <div class="col">
+        <div class="form-group "> 
+        <label for="country" class="label">Country</label> 
+        <input type="text" class="form-control" placeholder="Enter Country" name="country"  required  [(ngModel)]="address.country"#country="ngModel"
+        [class.is-invalid]="country.invalid && country.touched">
+                 <div *ngIf="country.errors && (country.invalid && country.touched)" >
+                  <div *ngIf="country.hasError('required')" class="text-danger">Country is required</div>
+        </div>
+      </div></div>
+      <div class="col">
+        <div class="form-group "> 
+        <label for="pincode" class="label">Pincode</label> 
+        <input type="text" class="form-control" placeholder="Enter pincode" name="pincode"  required  [(ngModel)]="address.pincode" #pincode="ngModel"
+        [class.is-invalid]="pincode.invalid && pincode.touched">
+                 <div *ngIf="pincode.errors && (pincode.invalid && pincode.touched)" >
+                  <div *ngIf="pincode.hasError('required')" class="text-danger">Pincode is required</div>
+        </div>
+      </div>
+      </div></div>
+            
+            <div class="row align-self-center" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+              <button class="btn" [disabled]="addressForm.form.invalid">Place Order</button>
+            </div> 
+            </form>
+        </div>
+    </div>
+</div>
+</ng-container>
+<ng-container *ngIf="products.length ==0">
+  <div class="container " style="margin-top: 100px;">
+      <div class="card empty ">
+          <div class="row align-self-center">
+              
+          <h1 class="title" style="margin-top: 10px;">My Cart</h1>
+        </div>
+        <div class="row align-self-center emptycart">
+      <div class="center">
+          <img src="https://media.istockphoto.com/photos/happy-smiling-pug-puppy-dog-holding-up-wire-metal-shopping-basket-picture-id1126251896?k=20&m=1126251896&s=612x612&w=0&h=FWvYTuVbDKbUWgdw0Ly9JKnUjX0UB8j_tpUYg4bmqns="  alt="">
+          <h4 style="margin-left: 150px;">Your cart is empty!</h4>
+          <h5>Add dogs - To make your life beautiful as never before</h5>
+         
+          <button routerLink="/home" class="btn btn-primary">Shop Now</button>
+        
+      </div>
+    </div>
+    </div>
+  </div>
+</ng-container>
+</div>
+<app-footer></app-footer>
