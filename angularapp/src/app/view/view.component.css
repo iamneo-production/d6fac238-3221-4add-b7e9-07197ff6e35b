@@ -1,0 +1,13 @@
+a {
+    padding: 0 1vh;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+.container{
+    margin-top: 100px;margin-bottom: 100px;  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+}
+.btn{
+    border-radius: 20px;
+}
