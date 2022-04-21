@@ -1,8 +1,4 @@
 
-
-.title {
-    margin-bottom: 5vh
-}
 .center img {
     text-decoration: none;
     color: inherit;
@@ -13,6 +9,11 @@
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 130px;
+}
+
+
+.title {
+    margin-bottom: 5vh
 }
 .empty{
     max-width: 1400px;
@@ -42,8 +43,8 @@
 .cart {
     background-color: #fff;
     padding: 4vh 5vh;
-   
-    border-radius: 1rem
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem
 }
 
 @media(max-width:1400px) {
@@ -54,9 +55,28 @@
     }
 }
 
+.summary {
+    background-color: #ddd;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 4vh;
+    color: rgb(65, 65, 65)
+}
 
+@media(max-width:1200px) {
+    .summary {
+        border-top-right-radius: unset;
+        border-bottom-left-radius: 1rem
+    }
+}
 
+.summary .col-2 {
+    padding: 0
+}
 
+.summary .col-10 {
+    padding: 0
+}
 
 .row {
     margin: 0
@@ -81,7 +101,10 @@ a {
     padding: 0 1vh
 }
 
-
+.close {
+    margin-left: auto;
+    font-size: 0.7rem
+}
 
 img {
     width: 3.5rem
@@ -129,9 +152,10 @@ input:focus::-webkit-input-placeholder {
     background-color: #000;
     border-color: #000;
     color: white;
-    width: 100px;
+    width: 400px;
     font-size: 0.7rem;
-   
+    margin-top: 4vh;
+    margin-left: 100px;
     padding: 1vh;
     border-radius: 0
 }
@@ -142,7 +166,6 @@ input:focus::-webkit-input-placeholder {
     box-shadow: none;
     color: white;
     -webkit-box-shadow: none;
-   
     transition: none
 }
 
