@@ -16,6 +16,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewComponent } from './view/view.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -24,29 +25,22 @@ import { ViewComponent } from './view/view.component';
     LoginComponent,
     SignupComponent,
     HomepageComponent,
-<<<<<<< HEAD
     NavbarComponent,
     AdminhomepageComponent,
     FooterComponent,
     CartComponent,
     OrderComponent,
     CheckoutComponent,
-    ViewComponent
-=======
-    AdminhomepageComponent,
-    FooterComponent,
+    ViewComponent,
     ProductDetailsComponent
->>>>>>> e1d86f65af87f2126f3ed0db6cc6f2f70e345eca
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-<<<<<<< HEAD
     NgbModule,
-=======
->>>>>>> e1d86f65af87f2126f3ed0db6cc6f2f70e345eca
   ],
   providers: [],
   bootstrap: [AppComponent]

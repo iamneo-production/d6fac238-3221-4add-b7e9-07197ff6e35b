@@ -9,6 +9,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { OrderComponent } from './order/order.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'signup' ,component:SignupComponent},
   {path:'home' ,component:HomepageComponent,canActivate:[AuthGuard]},
   {path:'admin' ,component:AdminhomepageComponent,canActivate:[AuthGuard,RoleGuard]},
+  {path:'productdetail/:pid',component:ProductDetailsComponent,canActivate:[AuthGuard]},
   {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
   {path:'myorders',component:OrderComponent,canActivate:[AuthGuard]},
   {path:'checkout',component:CheckoutComponent,canActivate:[AuthGuard]},
