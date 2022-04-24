@@ -1,10 +1,10 @@
 package com.examly.springapp.service;
 import java.sql.Date;
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.examly.springapp.exception.OrderNotExistException;
 import com.examly.springapp.dto.AddressDto;
 import com.examly.springapp.model.Address;
 import com.examly.springapp.model.Cart;
@@ -18,7 +18,7 @@ import com.examly.springapp.repository.OrderRepo;
 
 @Service
 public class OrderService {
-	
+
 	@Autowired
 	private OrderRepo orderRepo;
 	@Autowired
@@ -30,6 +30,7 @@ public class OrderService {
 	public Order placeOrder(UserModel user,AddressDto address) {
       
         Cart cart  = cartService.getCartByUser(user.getId());
+       
         Address addressModel=new Address();
         addressModel.setHouseno(address.getHouseno());
         addressModel.setStreet(address.getStreet());
@@ -72,8 +73,11 @@ public class OrderService {
 		return orderRepo.findAllByUserOrderByCreatedDateDesc(user);
 	}
 	public Order getOneOrder(long id) {
-		Order order= orderRepo.findById(id).orElse(null);
-		return order;
+		Optional<Order> order= orderRepo.findById(id);
+		if(!order.isPresent()) {
+			throw new OrderNotExistException("Order id is invalid " + id);
+		}
+		return order.get();
 	}
 	
 	public List<Order> allOrders(){
@@ -81,15 +85,18 @@ public class OrderService {
 	}
 	
 	public void deleteOrder(long id) {
-		Order order=orderRepo.findById(id).orElse(null);
-		if(order!=null) {
-		
-		orderRepo.delete(order);
-		
+		Optional<Order> order= orderRepo.findById(id);
+		if(!order.isPresent()) {
+			throw new OrderNotExistException("Order id is invalid " + id);
 		}
+		
+		orderRepo.delete(order.get());
+		
+		
 		
 		
 	}
+	
 	
 }
 

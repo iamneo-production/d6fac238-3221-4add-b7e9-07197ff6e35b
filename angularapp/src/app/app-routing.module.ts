@@ -21,7 +21,8 @@ const routes: Routes = [
   {path:'cart',component:CartComponent,canActivate:[AuthGuard]},
   {path:'myorders',component:OrderComponent,canActivate:[AuthGuard]},
   {path:'checkout',component:CheckoutComponent,canActivate:[AuthGuard]},
-  {path:'vieworder/:id',component:ViewComponent,canActivate:[AuthGuard]}
+  {path:'vieworder/:id',component:ViewComponent,canActivate:[AuthGuard]},
+  {path:'search/:keyword',component:HomepageComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({
