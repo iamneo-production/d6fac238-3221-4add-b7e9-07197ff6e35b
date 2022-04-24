@@ -23,6 +23,11 @@ export class NavbarComponent implements OnInit {
     this.checkuser=JSON.parse(localStorage.getItem("userdata"));
     this.username=this.checkuser.username;
   }
+  doSearch(value:string)
+  {
+    console.log(`value=${value}`);
+    this.router.navigateByUrl(`/search/${value}`);
+  }
   logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("userdata");

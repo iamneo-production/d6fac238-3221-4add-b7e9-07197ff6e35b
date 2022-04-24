@@ -25,4 +25,7 @@ export class ProductService {
   public deleteProductById(pid:number){
     return this.httpClient.get(apiUrl+"delete/"+pid);
   }
+  public searchProducts(theKeyword: string):Observable<any> {
+    return this.httpClient.get(apiUrl+'search/'+theKeyword);
+  }
 }

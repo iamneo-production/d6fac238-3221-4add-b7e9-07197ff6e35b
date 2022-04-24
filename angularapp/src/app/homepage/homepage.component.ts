@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../entity/product';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
@@ -16,7 +16,8 @@ export class HomepageComponent implements OnInit {
   product:Product;
   addToCart:any;
   quantity:number;
-  constructor(private productService:ProductService,private router:Router,private cartService:CartService) {
+  searchMode:boolean=false;
+  constructor(private productService:ProductService,private router:Router,private cartService:CartService,private route:ActivatedRoute) {
     
    }
 
@@ -25,14 +26,16 @@ export class HomepageComponent implements OnInit {
     this.listProducts();
   }
   listProducts(){
-    this.productService.getProductList().subscribe(
-      data=>{
-        this.products=data;
-      },
-      error=>{
-        console.log(error);
-      }
-    );
+    this.searchMode=this.route.snapshot.paramMap.has('keyword');
+    
+    if(this.searchMode)
+    {
+       console.log(this.searchMode);
+       this.handleSearchProducts();
+    }
+    else
+    
+    this.showProducts();
    }
    show(){
      this.isopen=!this.isopen;
@@ -48,6 +51,29 @@ export class HomepageComponent implements OnInit {
     console.log(this.pid,this.quantity);
    this.cartService.addToCart(this.pid,this.quantity);
 
+ }
+ showProducts(){
+     
+  this.productService.getProductList().subscribe(
+   data=>{
+     this.products=data;
+   },
+   error=>{
+     console.log(error);
+   }
+ );
+
+}
+ handleSearchProducts()
+ {
+   const theKeyword:string=this.route.snapshot.paramMap.get('keyword');
+   console.log(theKeyword);
+   this.productService.searchProducts(theKeyword).subscribe(
+     data =>{
+       this.products=data;
+       
+     }
+   );
  }
 
 }

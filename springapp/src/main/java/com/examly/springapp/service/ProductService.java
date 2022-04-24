@@ -72,6 +72,16 @@ public void changeQuantity(long pid, int quantity) {
 	proRepo.save(product);
 	
 }
+public List<Product> searchProduct(String product_name)
+{
+	try {
+		List<Product> prdt=proRepo.findByName(product_name);
+		return prdt;
+	}
+	catch(Exception e) {
+		return null;
+	}
+}
 
 
 }
