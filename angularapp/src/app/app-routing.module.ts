@@ -10,6 +10,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { OrderComponent } from './order/order.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProfileComponent } from './profile/profile.component';
 import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'myorders',component:OrderComponent,canActivate:[AuthGuard]},
   {path:'checkout',component:CheckoutComponent,canActivate:[AuthGuard]},
   {path:'vieworder/:id',component:ViewComponent,canActivate:[AuthGuard]},
+  {path:'profile',component:ProfileComponent,canActivate:[AuthGuard]},
   {path:'search/:keyword',component:HomepageComponent,canActivate:[AuthGuard]}
 ];
 
