@@ -1,5 +1,7 @@
 package com.examly.springapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,14 +50,23 @@ public class CartController {
 	}
 	
 	@GetMapping("/list/{id}")
-	public  Cart list(@PathVariable (value="id") long id) {
-		return cartService.getCartByUser(id);
+	public ResponseEntity<Cart> list(@PathVariable (value="id") long id) {
+		Cart cart=cartService.getCartByUser(id);
+		if(cart!=null) {
+			return new ResponseEntity<>(cart,HttpStatus.OK);}
+		else {
+			return  new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PostMapping("/edit/{id}")
-	public Cart updateCart(@RequestBody CartItemDto cartItem,@PathVariable (value="id") long id) {
-		
-		return cartService.editCartItem(cartItem, id);
+	public ResponseEntity<Cart> updateCart(@RequestBody CartItemDto cartItem,@PathVariable (value="id") long id) {
+		Cart cart=cartService.editCartItem(cartItem, id);
+		if(cart!=null) {
+			return new ResponseEntity<>(cart,HttpStatus.OK);
+		}else {
+			return  new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@GetMapping("delete/{cartItemid}/{id}")
@@ -67,6 +78,5 @@ public class CartController {
 	public String deleteCart(@PathVariable (value="id")long id) {
 		return cartService.deleteCart(id);
 	}
-	
 	
 }
