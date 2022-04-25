@@ -1,0 +1,189 @@
+<app-navbar></app-navbar>
+
+
+<div class="container-fluid" style="margin-top: 100px;">
+    <div class="card pro" >
+        <div class="card-btn pb-3">
+            <a [routerLink]="['/home']"><span class="text-muted">Back to shop</span></a>
+        </div>
+            <div class="wrapper row ">
+                <div class="preview col-md-6">
+                    
+                    <div class="preview-pic tab-content">
+                      <div class="tab-pane active" id="pic-1"><img [src]="product.imageUrl" height="300"></div>
+                    </div>
+                   
+                    
+                </div>
+                <div class="details col-md-6">
+                    <h2 class="product-title">{{product.product_name}}</h2>
+                    
+                   <br>
+                   <div class="row ">
+                    <div class="col-md-6 border-right" >
+                    <p><strong>Description</strong></p>
+                    <p class="product-description">{{product.description}}</p></div>
+                    <div class="col-md-6">
+                    <p><strong>Perks</strong></p>
+                    <ul>
+                        <li class="fa fa-circle green-dot">&nbsp;<span style="color: black;"> Well Trained Puppies</span></li><br>
+                        <li class="fa fa-circle green-dot">&nbsp;<span style="color: black;"> Very Healthy Puppies</span></li><br>
+                        <li class="fa fa-circle green-dot">&nbsp;<span style="color: black;"> Pure breeds</span></li>
+                    </ul></div>
+                </div>
+                    <h4 class="price">Current price: <span class="green-text">${{product.price}}</span></h4>
+                
+                    <div class="action">
+                        
+                            <label class="text-muted" for="quantity">QTY:</label>
+    
+                        &nbsp;
+                        <a  (click)="minus()">-</a><a  class="border">{{quantity}}</a><a  (click)="add()">+</a>
+                          <br>
+                          <br>
+                        <button class=" btn btn-primary" type="button" (click)="toCart()">Add to cart</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-red" type="button" (click)="buynow()">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+       
+    </div>
+</div>
+<div class="container-fluid px-0 py-5 mx-auto">
+    <div class="row justify-content-center mx-0 mx-md-auto">
+        <div class="col-lg-10 col-md-11 px-1 px-sm-2">
+            <div class="card border-0 px-3">
+                <!-- top row -->
+                <div class="d-flex row py-5 px-5 bg-light">
+                    <div class="green-tab p-2 px-3 mx-2">
+                        <p class="sm-text mb-0">OVERALL RATING</p>
+                        <h4>{{overallRating}}</h4>
+                    </div>
+                    <div class="white-tab p-2 mx-2 text-muted">
+                        <p class="sm-text mb-0">ALL REVIEWS</p>
+                        <h4>{{review.length}}</h4>
+                    </div>
+                   
+                    <div class="ml-md-auto p-2 mx-md-2 pt-4 pt-md-3"> <button class="btn btn-red px-4"  data-toggle="modal" data-target="#wirtereview">WRITE A REVIEW</button> </div>
+                </div> 
+                <!-- Review by user -->
+                <div class="row" *ngIf="review.length != 0">
+                <div class=" col-md-3 review p-5" *ngFor="let item of review">
+                    <div class="row d-flex">
+                        <div class="profile-pic"><img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png" width="60px" height="60px"></div>
+                        <div class="d-flex flex-column pl-3">
+                            <h4>{{item.user.username}}</h4>
+                            <p class="grey-text">{{item.createdDate}}</p>
+                        </div>
+                    </div>
+                    <div class="row pb-3 green-text" >
+                       
+                            Rating: {{item.rating}}/5
+                        
+                      
+                    </div>
+                    <div class="row pb-1">
+                        <p>{{item.comment}}</p>
+                    </div>
+                    <div class="row pb-2" *ngIf="item.user.id === userid" >
+                       
+                       <span  data-toggle="modal" data-target="#editreview" (click)="getreview(item.id)"><i class="fa fa-edit" style="color:grey; margin-right: 30px;"></i></span>
+                       <span  data-toggle="modal" data-target="#deletereview" (click)="getreview(item.id)"><i class="fa fa-trash" style="color:grey; "></i></span>
+                    </div>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------Write Review------------------------->
+<div class="modal fade" id="wirtereview" tabindex="-1" role="dialog" aria-labelledby="wirtereviewLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Review</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #addReviewForm="ngForm" (ngSubmit)="addReview()">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Rating</label>
+                </div>
+                <select class="form-control" [(ngModel)]="rating" name="rating">
+                    <option *ngFor="let rating of arr" [value]="rating">{{rating}}</option>
+                    </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Comment</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="addreview.comment" name="comment"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" >Submit</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-----Edit Review------------------------>
+  <div class="modal fade" id="editreview" tabindex="-1" role="dialog" aria-labelledby="wirtereviewLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Review</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #editReviewForm="ngForm" (ngSubmit)="editReview()">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Rating</label>
+                </div>
+                <select class="form-control" [(ngModel)]="editreview.rating" name="rating">
+                    <option *ngFor="let rating of arr" [value]="rating">{{rating}}</option>
+                    </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Comment</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="editreview.comment" name="comment"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" >Submit</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-----------------Delete Review---------------->
+  <div class="modal fade" id="deletereview" tabindex="-1" role="dialog" aria-labelledby="deletereviewLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Review</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure to Delete Review 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="deleteReview()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>

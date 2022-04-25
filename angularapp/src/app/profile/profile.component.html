@@ -1,0 +1,114 @@
+<app-navbar></app-navbar>
+<div class="col back" style="padding-bottom: 50px; padding-top: 50px;">
+<div class="col show">
+    <div class="container a">
+      <button class="btn btn-danger" style="float: right; border-radius: 50%; margin-right: 5px;margin-top: 10px; width: 40px; height: 40px;" (click)="back()">X</button>
+      <h2 class="col text-center" style="margin-top: 30px;">My Profile</h2>
+      
+      <div class="row">
+        
+          <div class="from-group">
+            <div class="product-tumb ">
+              <img src="https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png" alt="">
+          </div>
+          </div>
+          </div>
+        
+      <div class="col">
+        <div class="form-group"> 
+        <label for="email" class="label">Email:</label> 
+        <input type="email" class="form-control"placeholder="Enter email" name="email" [(ngModel)]="user.email" required  readonly>
+        </div>
+      </div>
+      
+      <div class="col">
+        <div class="form-group "> 
+        <label for="username" class="label">User Name:</label> 
+        <input type="username" class="form-control" placeholder="Enter username" name="username" [(ngModel)]="user.username" required readonly>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group "> 
+        <label for="phoneNumber" class="label">Phone Number:</label> 
+        <input type="phoneNumber" class="form-control"placeholder="Enter phonenumber" name="phonenumber" [(ngModel)]="user.phoneNumber" required readonly>
+        </div>
+      </div>
+      <br>
+      <div class="col text-center">
+      <button class="btn btn-primary btnbot" data-toggle="modal" data-target="#edituser" >Edit</button>
+      
+      
+    </div>
+    <br>
+    </div>
+  
+    <div class="modal fade bd-example-modal-lg" id="edituser" tabindex="-1" role="dialog" aria-labelledby="edituser" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #editUser="ngForm" (ngSubmit)="onSubmitUser()">
+              <div class="form-group">
+                  <label for="username" class="label">UserName:</label>
+                 <input type="text" class="form-control"placeholder="Enter Username" name="username" [(ngModel)]="user.username"  required #username="ngModel" 
+                 [class.is-invalid]="username.invalid && username.touched">
+                 <div *ngIf="username.errors && (username.invalid && username.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                  <div *ngIf="username.hasError('required')">Username is required</div>
+                
+                </div>
+                </div>
+                <div class="form-group">
+                 <label for="phno" class="label">Phone Number:</label>
+                <input type="text" class="form-control"placeholder="Enter phonenumber" name="phoneNumber" [(ngModel)]="user.phoneNumber" required #phoneNumber="ngModel" pattern="^\d{10}$"
+                 [class.is-invalid]="phoneNumber.invalid && phoneNumber.touched">
+        
+                 <div *ngIf="phoneNumber.errors && (phoneNumber.invalid && phoneNumber.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                  <div *ngIf="phoneNumber.hasError('required')">Phone Number is required</div>
+                  <div *ngIf="phoneNumber.hasError('pattern')">Enter Valid Phone Number</div>
+                </div>
+               </div>
+               <div class="form-group">
+                 
+                 <label for="email" class="label">Email:</label>
+                 <input type="email" class="form-control"placeholder="Enter email" name="email" required [(ngModel)]="user.email" #email="ngModel" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" 
+                 [class.is-invalid]="email.invalid && email.touched">
+                
+                 <div *ngIf="email.errors && (email.invalid && email.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                  
+                   <div *ngIf="email.hasError('required')">Email is required</div>
+                   <div *ngIf="email.hasError('pattern')">Enter Valid Email </div>
+                  </div>
+                  
+                
+               </div>
+         
+               <div class="form-group">
+                 <label for="pwd" class="label">Password:</label>
+                 <input type="password" class="form-control"  placeholder="Minimum 8 characters,at least one letter and one number" name="password"   required [(ngModel)]="user.password" #password="ngModel" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                 [class.is-invalid]="password.invalid && password.touched">
+        
+                 <div *ngIf="password.errors && (password.invalid && password.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                  <div *ngIf="password.hasError('required')">Password is required</div>
+                  <div *ngIf="password.hasError('pattern')">Enter Valid password</div>
+                 </div>
+               </div>
+               
+               
+               <button type="submit" class="btn btn-primary"style="margin-left: 275px; margin-right: 50px; width: 200px; border-radius: 20px;">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <app-footer></app-footer>  
