@@ -2,6 +2,7 @@ package com.examly.springapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,22 +36,22 @@ public class ReviewController {
 	}
 
 	@PostMapping("/addreview")
-	public Review addReview(@RequestBody ReviewDto reviewDto) {
+	public ResponseEntity<Review> addReview(@RequestBody ReviewDto reviewDto) {
 		UserModel user=userService.getOneUser(reviewDto.getUserid());
 		Product product=productService.getOneProduct(reviewDto.getProductid());
 		return reviewService.addReview(reviewDto,user,product);
 	}
 	@GetMapping("/listreview/{pid}")
-	public List<Review> listReview(@PathVariable long pid){
+	public ResponseEntity<List<Review>> listReview(@PathVariable long pid){
 		Product product=productService.getOneProduct(pid);
 		return reviewService.showReview(product);
 	}
 	@GetMapping("/getonereview/{id}")
-	public Review getReview(@PathVariable long id) {
+	public ResponseEntity<Review> getReview(@PathVariable long id) {
 		return reviewService.getOneReview(id);
 	}
 	@PostMapping("/editreview")
-	public Review editReview(@RequestBody ReviewDto reviewDto) {
+	public ResponseEntity<Review> editReview(@RequestBody ReviewDto reviewDto) {
 		return reviewService.editReview(reviewDto);
 	}
 	@GetMapping("/deletereview/{id}")
