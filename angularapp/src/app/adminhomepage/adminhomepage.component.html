@@ -1,1 +1,244 @@
-<p>adminhomepage works!</p>
+<app-navbar></app-navbar>
+<div class="container-fluid" style="margin-bottom: 100px;">
+<div class="row">
+    <div class="col">
+      
+        <div class="container-fluid product">
+          <div class="title">
+            <div class="row">
+                <div class="col">
+                    <h4><b> Product Management</b></h4>
+                </div>
+                
+            </div>
+        </div>
+          <div class="row addproduct" *ngIf="isShown===false" >
+            <button type="button" class="btn btn-primary  productbutton" data-toggle="modal" data-target="#addproduct">Add Product</button> 
+          </div>
+          <table class="table table-hover" >
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col"></th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let temp of products| slice: (page-1) * pageSize : page * pageSize">
+                <th scope="row"><img [src]="temp.imageUrl" alt=""  width="90px" height="100px"></th>
+                <td>{{temp.product_name}}</td>
+                <td>{{temp.price}}</td>
+                <td>{{temp.quantity}} </td>
+                <td><button type="button" class="btn btn-primary" (click)="show(temp.pid)">Show Details</button> </td>
+              </tr>
+            </tbody>
+          </table>
+          <ngb-pagination class="border-top pt-3  d-flex justify-content-center"
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="products.length"></ngb-pagination>
+          
+          </div>
+        </div>
+        <div class="col show" *ngIf="isShown">
+          <div class="container a">
+            <button class="btn btn-danger" style="float: right;" (click)="back()">x</button>
+            <h2 class="detail">Product Details</h2>
+            
+            <div class="row">
+            <div class="col">
+            <div class="from-group">
+              <div class="product-tumb">
+                <img [src]="product.imageUrl" alt="">
+            </div>
+            </div>
+            </div>
+            <div class="col">
+            <h4>{{product.product_name}}</h4>
+            </div>
+            </div>
+            <div class="row pq">
+            <div class="col">
+             <label class="label">Price:</label>
+              <div class="product-price">${{product.price}}</div>   
+            </div>
+            <div class="col">
+                <div class="form-group"> 
+                    <label for="username" class="label">Quantity:</label> 
+                    <div class="product-price">&nbsp;&nbsp;{{product.quantity}}</div>  
+                  </div>
+            </div>
+            </div>
+           
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" name="description" rows="3" value={{product.description}} readonly></textarea>
+            </div>
+            <div class="col text-center">
+            <button class="btn btn-secondary btnbot" data-toggle="modal" data-target="#editproduct" >Edit</button>
+            <button class="btn btn-danger btnbot" data-toggle="modal" data-target="#deleteproduct" >Delete</button>
+          </div>
+          </div>
+        
+        
+        </div>
+    </div>
+  </div>
+  <!-----------------------Add Product--------------------------->
+  <div class="modal fade bd-example-modal-lg" id="addproduct" tabindex="-1" role="dialog" aria-labelledby="addproductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #addProduct="ngForm" (ngSubmit)="newProduct()">
+            <div class="form-group">
+              
+                <label for="product_name" class="label">Product Name</label>
+               <input type="text" class="form-control"placeholder="Enter Product Name" name="product_name" [(ngModel)]="product1.product_name" required #product_name="ngModel" 
+               [class.is-invalid]="product_name.invalid && product_name.touched">
+               <div *ngIf="product_name.errors && (product_name.invalid && product_name.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                <div *ngIf="product_name.hasError('required')">Product Name is required</div>
+              
+              </div>
+              </div>
+              <div class="form-group">
+               <label for="price" class="label">Price:</label>
+              <input type="text" class="form-control"placeholder="Enter price" name="price" [(ngModel)]="product1.price" required #price="ngModel" pattern="^\d{2,}$"
+               [class.is-invalid]="price.invalid && price.touched">
+      
+               <div *ngIf="price.errors && (price.invalid && price.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                <div *ngIf="price.hasError('required')">Price is required</div>
+                <div *ngIf="price.hasError('pattern')">Enter Valid Price</div>
+              </div>
+             </div>
+             <div class="form-group">
+               
+               <label for="quantity" class="label">Quantity:</label>
+               <input type="text" class="form-control"placeholder="Enter quantity" name="quantity" required [(ngModel)]="product1.quantity" #quantity="ngModel"  
+               [class.is-invalid]="quantity.invalid && quantity.touched">
+               <div *ngIf="quantity.errors && (quantity.invalid && quantity.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                <div *ngIf="quantity.hasError('required')">Quantity is required</div>
+              
+              </div>
+              
+             </div>
+       
+             <div class="form-group">
+               <label for="imageUrl" class="label">Image Url:</label>
+               <input type="text" class="form-control"  placeholder="Enter image url" name="imageUrl"   required [(ngModel)]="product1.imageUrl" #imageUrl="ngModel" 
+               [class.is-invalid]="imageUrl.invalid && imageUrl.touched">
+      
+               <div *ngIf="imageUrl.errors && (imageUrl.invalid && imageUrl.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                <div *ngIf="imageUrl.hasError('required')">ImageUrl is required</div>
+                
+               </div>
+               
+             </div>
+             <div class="form-group">
+               <label for="description" class="label">Description:</label>
+               <textarea class="form-control" name="description" rows="3" required [(ngModel)]="product1.description">
+                </textarea>
+            
+             </div>
+            
+             <div class="con" >
+             <button type="submit" class="btn btn-primary" style="margin-left: 275px; margin-right: 50px; width: 200px; border-radius: 20px;">Submit</button>
+            </div>
+          </form>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------Edit Product------------------------------------------------------->
+  <div class="modal fade bd-example-modal-lg" id="editproduct" tabindex="-1" role="dialog" aria-labelledby="editproductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #editProduct="ngForm" (ngSubmit)="editProductLocal()">
+            <div class="form-group">
+                <label for="product_name" class="label">Product Name</label>
+               <input type="text" class="form-control"placeholder="Enter Product Name" name="product_name" [(ngModel)]="product.product_name" required #product_name="ngModel">
+             
+              </div>
+              <div class="form-group">
+               <label for="price" class="label">Price:</label>
+              <input type="text" class="form-control"placeholder="Enter price" name="price" [(ngModel)]="product.price" required #price="ngModel" pattern="^\d{2,}$"
+               [class.is-invalid]="price.invalid && price.touched">
+      
+               <div *ngIf="price.errors && (price.invalid && price.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                <div *ngIf="price.hasError('required')">Price is required</div>
+                <div *ngIf="price.hasError('pattern')">Enter Valid Price</div>
+              </div>
+             </div>
+             <div class="form-group">
+               <label for="quantity" class="label">Quantity:</label>
+               <input type="text" class="form-control"placeholder="Enter quantity" name="quantity" required [(ngModel)]="product.quantity" #quantity="ngModel"  
+               [class.is-invalid]="quantity.invalid && quantity.touched">
+               <div *ngIf="quantity.errors && (quantity.invalid && quantity.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                <div *ngIf="quantity.hasError('required')">Quantity is required</div>
+              </div>
+             </div>
+             <div class="form-group">
+               <label for="imageUrl" class="label">Image Url:</label>
+               <input type="text" class="form-control"  placeholder="Enter image url" name="imageUrl"   required [(ngModel)]="product.imageUrl" #imageUrl="ngModel" 
+               [class.is-invalid]="imageUrl.invalid && imageUrl.touched">
+               <div *ngIf="imageUrl.errors && (imageUrl.invalid && imageUrl.touched)" class="alert alert-danger" style="margin-top: 10px;">
+                <div *ngIf="imageUrl.hasError('required')">ImageUrl is required</div> 
+               </div>
+             </div>
+             <div class="form-group">
+               <label for="description" class="label">Description:</label>
+               <textarea class="form-control" name="description" rows="3" required [(ngModel)]="product.description">
+                </textarea>
+             </div>
+             <div class="con" >
+             <button type="submit" class="btn btn-primary" style="margin-left: 275px; margin-right: 50px; width: 200px; border-radius: 20px;">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------------Delete User---------------------------------------------------------------------->
+  <div class="modal fade" id="deleteproduct" tabindex="-1" role="dialog" aria-labelledby="deleteproductLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure to Delete Product 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="deleteProduct()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>

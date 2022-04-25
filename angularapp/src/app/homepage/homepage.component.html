@@ -1,1 +1,31 @@
-<p>homepage works!</p>
+<app-navbar></app-navbar>
+<div class="container-fluid" style="margin-top: 50px; margin-bottom: 150px;">
+<div class="row" style="margin-left: 15px;">
+    <div class="col-sm-3 product" *ngFor="let temp of products">
+        <div class="product-tumb">
+            <img [src]="temp.imageUrl" alt="">
+        </div>
+        <div class="product-details">
+            <h4><a >{{temp.product_name}}</a></h4>
+                
+            <div class="product-bottom-details">
+                <div class="product-price">PRICE :${{temp.price}}</div>    
+            </div>
+        </div>
+        <div class="row text-center" style=" margin-left: 1.5px;">
+            <button type="button" class="btn btn-primary" (click)="toCart(temp.pid)" style="margin-right: 10px; margin-top: 10px;margin-bottom: 10px;" >Add to Cart</button>
+            <button type="button" class="btn btn-primary" (click)="showdetails(temp.pid)"  data-toggle="modal" data-target="myModal" style="margin-top: 10px;margin-bottom: 10px;">Quick View</button>
+        </div>
+    </div>
+    
+
+</div>
+</div>
+<div *ngIf="products?.length==0" class=" alert alert-warning col-md-11" role="alert">
+    No products found.
+</div>
+<app-footer></app-footer>
+
+     
+
+ 

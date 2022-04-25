@@ -1,24 +1,23 @@
 package com.examly.springapp.service;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import com.examly.springapp.exception.UserNotExistException;
 import com.examly.springapp.model.UserModel;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.responseEntity.ResponseHandler;
-
+import com.examly.springapp.util.JwtAuthentication;
 @Service
 public class UserService {
 	String role="User";
 	@Autowired
 	private UserRepo userRepo;
-
-	//@Autowired
-	//private JwtAuthentication jwt;
-
+	@Autowired
+	private JwtAuthentication jwt;
 	public UserService(UserRepo userRepo) {
 		super();
 		this.userRepo = userRepo;
@@ -45,20 +44,11 @@ public class UserService {
 		}
 		userlocal.setActive(true);
 		userRepo.save(userlocal);
-		//String token = jwt.generateJwt(userlocal);
-		return ResponseHandler.generateResponse("Login Success", HttpStatus.OK, userlocal);
-
+		String token = jwt.generateJwt(userlocal);
+		return ResponseHandler.generateLoginResponse("Login Success",token, HttpStatus.OK, userlocal);
 	}
 	
-	public UserModel findByEmail(String email) {
-		try {
-		UserModel userlocal=userRepo.getUserByEmail(email);
-		return userlocal;
-		}
-		catch(Exception e) {
-			return null;
-		}
-	}
+	
 	public ResponseEntity<Object> editUser(UserModel user,long id){
 		try {
 			
@@ -95,13 +85,14 @@ public class UserService {
 
 	public UserModel getOneUser(long id) {
 		
-		try { 
-			UserModel userexist=userRepo.findById(id).orElse(null);
-			return userexist;
-	}
-		catch(Exception e) {
-			return null;
-		}
+			Optional<UserModel> userexist=userRepo.findById(id);
+			if(!userexist.isPresent()) {
+				throw new UserNotExistException("User id is invalid " + id);
+			}
+			return userexist.get();
+	
+		
 }
+		
 		
 }

@@ -46,6 +46,11 @@ public class ProductController {
 	public Product showProduct(@PathVariable (value="pid")long id) {
 		return productserv.getOneProduct(id);
 	}
+	@GetMapping("/search/{product_name}")
+	public List<Product> searchProduct(@PathVariable (value="product_name") String name)
+	{
+		return productserv.searchProduct(name);
+	}
 	
 	
 }

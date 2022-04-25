@@ -1,0 +1,38 @@
+.product-tumb img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 50%;
+    
+}
+.back{
+    background-image: url("https://c4.wallpaperflare.com/wallpaper/768/50/499/snoopy-wallpaper-preview.jpg");
+    background-repeat: no-repeat;
+    background-size: 1550px 790px;
+    
+}
+.form-control{
+   
+    border-radius: 10px;
+}
+.product-tumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    background: #fff;;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    
+}
+
+
+.a{
+    background-color: #fff;
+    margin-top: 70px;
+    max-width: 25%;
+    border: 3px solid grey;
+    border-radius: 10%;
+    
+    
+}
