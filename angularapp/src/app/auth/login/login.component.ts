@@ -23,10 +23,13 @@ export class LoginComponent implements OnInit {
       data=>{
         console.log("received");
         localStorage.setItem("response",JSON.stringify(data));
+        console.log(localStorage.getItem("response"));
         this.userlocal=JSON.parse(localStorage.getItem("response"));
         localStorage.setItem("userdata",JSON.stringify(this.userlocal.data));
+        console.log(localStorage.getItem("userdata"));
         localStorage.setItem("token",JSON.stringify(this.userlocal.token));
         this.local=this.userlocal.data;
+        console.log(data);
         console.log(localStorage.getItem("token"));
         
         if(this.local.role==="User"){
